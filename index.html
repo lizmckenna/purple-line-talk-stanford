@@ -12,12 +12,31 @@
             margin: 0;
         }
         @media print {
+            html {
+                scroll-snap-type: none !important;
+                height: auto !important;
+            }
+            body {
+                height: auto !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            body::before { display: none !important; }
             .slide {
-                width: 100vw;
-                height: 100vh;
+                width: 100%;
+                min-height: 100vh;
+                height: auto;
                 page-break-after: always;
                 page-break-inside: avoid;
+                overflow: visible !important;
             }
+            /* show every build step at once so no content is missing in print */
+            .fragment, .theory-col {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+            }
+            .nav-dots, nav, .progress-bar, .progress { display: none !important; }
         }
         :root {
             --bg: #FAFAF8;
