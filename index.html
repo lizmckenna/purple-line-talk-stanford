@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exit, Voice, and the Purple Line | Elizabeth McKenna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+        @media print {
+            .slide {
+                width: 100vw;
+                height: 100vh;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+        :root {
+            --bg: #FAFAF8;
+            --text: #1C1917;
+            --text-secondary: #57534E;
+            --accent: #601f9e;
+            --accent-muted: #8b5cb8;
+            --accent-light: #f0eaf5;
+            --border: #E7E5E4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100%;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(2rem, 6vw, 6rem);
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+
+        .content { max-width: 800px; width: 100%; }
+        .content.centered { text-align: center; }
+        .content.wide { max-width: 950px; }
+
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--border);
+        }
+        .corner-tl { top: 2rem; left: 2rem; border-right: none; border-bottom: none; }
+        .corner-tr { top: 2rem; right: 2rem; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 2rem; left: 2rem; border-right: none; border-top: none; }
+        .corner-br { bottom: 2rem; right: 2rem; border-left: none; border-top: none; }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.75rem, 4.5vw, 3rem);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Statement header - purple background style */
+        .statement-box {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .statement-box p {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .purple-text { color: var(--accent); }
+
+        .subtitle {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .lead-text {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.15rem, 2vw, 1.4rem);
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .small-text {
+            font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-muted));
+            margin: 0 auto 2rem;
+        }
+
+        .author-name {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .author-affiliation {
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            color: var(--text-secondary);
+        }
+
+        .venue-tag {
+            font-size: clamp(0.7rem, 1vw, 0.8rem);
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 2.5rem;
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(1rem, 2vw, 1.5rem);
+            margin-top: 1.5rem;
+        }
+
+        .evidence-card {
+            padding: clamp(1rem, 2vw, 1.5rem);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .evidence-stat {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .evidence-label {
+            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+
+        .threshold-table {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-collapse: collapse;
+        }
+
+        .threshold-table th,
+        .threshold-table td {
+            padding: clamp(0.75rem, 1.5vw, 1rem);
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .threshold-table th {
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .threshold-table td {
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+        }
+
+        .threshold-table .number {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .threshold-table tr.highlight {
+            background: var(--accent-light);
+        }
+
+        .table-note {
+            font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .bullet-list li {
+            font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+            line-height: 1.6;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .bullet-list li.sub {
+            padding-left: 3rem;
+            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+        }
+        .bullet-list li.sub::before {
+            left: 1.5rem;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-muted);
+        }
+
+        .image-placeholder {
+            background: var(--accent-light);
+            border: 2px dashed var(--accent-muted);
+            border-radius: 8px;
+            padding: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--accent);
+            margin: 1.5rem 0;
+        }
+
+        .image-placeholder .label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-placeholder .instructions {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .nav-dot:hover { background: var(--accent-muted); }
+        .nav-dot.active { background: var(--accent); transform: scale(1.3); }
+
+        /* Section Navigation Bar */
+        .section-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 248, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            gap: clamp(0.5rem, 2vw, 1.5rem);
+            padding: 0.6rem 1rem;
+        }
+
+        .section-nav a {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .section-nav a:hover {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .section-nav a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+            font-weight: 600;
+        }
+
+        /* Results sub-nav - bottom position */
+        .results-subnav {
+            position: fixed;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.4rem 1rem;
+        }
+        .results-subnav.visible {
+            display: flex;
+        }
+        .results-subnav a {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            background: rgba(250, 250, 248, 0.9);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+        .results-subnav a:hover, .results-subnav a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+            border-color: var(--accent-muted);
+        }
+
+        /* Hide nav on title slide */
+        .section-nav.hidden { opacity: 0; pointer-events: none; }
+
+        .slide {
+            padding-top: clamp(3.5rem, 8vw, 5rem);
+        }
+
+        /* Three column layout for theory comparison */
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .theory-col {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .theory-col.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .theory-col h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-light);
+        }
+        .theory-col p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.4rem;
+        }
+        .theory-col .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-top: 0.6rem;
+        }
+        .theory-col .extension {
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .theory-col .extension .label {
+            color: var(--accent);
+        }
+        .theory-col .extension p {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Progressive reveal */
+        .fragment {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s;
+            transform: translateY(8px);
+        }
+        .fragment.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0s;
+        }
+
+        /* State cards with images */
+        .state-card-img {
+            background: white;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 0.85rem 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+        }
+        .state-card-img img {
+            width: 55px;
+            height: 38px;
+            object-fit: cover;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .state-card-img .text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .state-card-img strong {
+            color: var(--accent);
+        }
+
+        /* Blockquote styling */
+        .pull-quote {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+            line-height: 1.5;
+            color: var(--text);
+            font-style: italic;
+            padding: 1.25rem 1.5rem;
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+        .pull-quote .attribution {
+            font-style: normal;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .evidence-grid, .three-col { grid-template-columns: 1fr; }
+            .nav-dots { display: none; }
+            .section-nav {
+                gap: 0.25rem;
+                padding: 0.5rem 0.5rem;
+            }
+            .section-nav a {
+                padding: 0.3rem 0.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section Navigation Bar -->
+    <nav class="section-nav" id="sectionNav">
+        <a href="#slide-2" data-section="puzzle">Puzzle</a>
+        <a href="#slide-5" data-section="theory">Theory/Lit</a>
+        <a href="#slide-8" data-section="methods">Methods</a>
+        <a href="#slide-12" data-section="results">Results</a>
+        <a href="#slide-discussion" data-section="discussion">Discussion</a>
+        <a href="#slide-appendix" data-section="appendix">Appendix</a>
+    </nav>
+
+    <nav class="nav-dots" id="navDots"></nav>
+
+    <!-- ============================================
+         SLIDE 1: TITLE
+         ============================================ -->
+    <section class="slide" id="slide-1" data-slide="1" data-section="title">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <h1 style="font-size: clamp(2.5rem, 6vw, 4rem);">Exit, Voice, and the <span class="purple-text">Purple Line</span></h1>
+            <p class="subtitle" style="font-size: clamp(1.3rem, 3vw, 1.8rem);">Sustaining Civic Power in the Age of Mass Protest</p>
+            <div class="divider"></div>
+            <p class="author-name" style="font-size: clamp(1.2rem, 2vw, 1.5rem);">Elizabeth McKenna</p>
+            <p class="author-affiliation" style="font-size: clamp(1rem, 1.5vw, 1.2rem);">emckenna@hks.harvard.edu</p>
+            <p class="venue-tag" style="font-size: clamp(0.9rem, 1.3vw, 1.1rem);">Harvard Kennedy School</p>
+            <p style="font-size: clamp(0.85rem, 1.2vw, 1rem); color: var(--text-secondary); margin-top: 0.75rem; letter-spacing: 0.04em;">June 1, 2026 &nbsp;|&nbsp; Civil Society and Sustainability Conference &nbsp;|&nbsp; Stanford Graduate School of Business</p>
+        </div>
+        <span class="slide-number">1</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 2: MASS PARTICIPATION
+         ============================================ -->
+    <section class="slide" id="slide-2" data-slide="2" data-section="puzzle">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div class="statement-box">
+                <p>We live in an age of mass protest and mass political participation.</p>
+            </div>
+
+            <div id="protestGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/iraq.webp" alt="Iraq War protests 2003" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Iraq 2003</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/tea party rally.jpeg" alt="Tea Party Rally 2009" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Tea Party 2009</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/arabspring.webp" alt="Arab Spring 2011" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Arab Spring 2011</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/occupy.webp" alt="Occupy Wall Street 2011" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Occupy 2011</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/indignados.webp" alt="Indignados Spain 2011" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Indignados 2011</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/junho.jpg" alt="Jornadas de Junho Brazil 2013" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Junho 2013</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/blm.jpg" alt="Black Lives Matter 2014" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">BLM 2014</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/womens march.jpg" alt="Women's March 2017" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Women's March 2017</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/daywithoutimmigrant.jpeg" alt="Day Without Immigrants 2017" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Day w/o Immigrants 2017</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/march4ourlives.jpg" alt="March for Our Lives 2018" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">March for Our Lives 2018</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/hk.jpeg" alt="Hong Kong 2019" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">Hong Kong 2019</span>
+                </div>
+                <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;">
+                    <img src="assets/nokings.webp" alt="No Kings protests 2025" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.9); font-weight: 500;">No Kings 2025</span>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">2</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 3: BACKSLIDING - V-Dem
+         ============================================ -->
+    <section class="slide" id="slide-3" data-slide="3" data-section="puzzle">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div class="statement-box">
+                <p>At the same time, democracy is eroding.</p>
+            </div>
+
+            <div style="text-align: center; margin: 1rem 0;">
+                <img src="assets/vdem_autocratization.png" alt="V-Dem Autocratization Chart" style="max-width: 100%; max-height: 60vh; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+            </div>
+
+            <p class="small-text">Source: Varieties of Democracy (V-Dem) Dataset v15. Coppedge et al. (2024). <a href="https://v-dem.net/" style="color: var(--accent);">[Link]</a></p>
+        </div>
+        <span class="slide-number">3</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 4: THE QUESTION
+         ============================================ -->
+    <section class="slide" id="slide-4" data-slide="4" data-section="puzzle">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <p style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 600; color: var(--accent); line-height: 1.4;">Why (under the same conditions of democratic stress) do some organizations convert participation into policy influence while others don't?</p>
+        </div>
+        <span class="slide-number">4</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 5: THEORY/LIT - THE GAP
+         ============================================ -->
+    <section class="slide" id="slide-5" data-slide="5" data-section="theory">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2>The Participation-Power Gap: What We Don't Know</h2>
+
+            <ul class="bullet-list" style="font-size: clamp(0.9rem, 1.4vw, 1.05rem);">
+                <li class="fragment"><strong>Contentious politics tradition</strong> (<a href="https://global.oup.com/academic/product/contentious-politics-9780190255053?cc=us&lang=en&" style="color: var(--accent);">Tarrow & Tilly</a>; <a href="https://collectiveaction.stanford.edu/" style="color: var(--accent);">DOCA</a>): relies on protest event counts; lacks a view into internal organizational structure</li>
+                <li class="fragment"><strong>Civic engagement tradition</strong> (<a href="https://press.princeton.edu/books/hardcover/9780691180557/unequal-and-unrepresented" style="color: var(--accent);">Verba, Schlozman, Brady</a>): individual surveys
+                    <li class="sub fragment"><strong>Unobserved:</strong> how respondents are relationally connected, longitudinal participation, and internal org structure</li>
+                </li>
+                <li class="fragment"><strong>Movement and org theory exchange</strong> has enriched both traditions (<a href="https://www.cambridge.org/core/books/social-movements-and-organization-theory/EEE40B5EFAAE282FCD994346CBBC188D" style="color: var(--accent);">Davis, McAdam, Scott & Zald 2005</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4664200/" style="color: var(--accent);">Walker 2012</a>; <a href="https://psycnet.apa.org/record/2008-02555-003" style="color: var(--accent);">King and Soule 2007</a>; <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=u_jPc_wAAAAJ&sortby=pubdate&citation_for_view=u_jPc_wAAAAJ:TIZ-Mc8IlK0C" style="color: var(--accent);">Soule et al. 2023</a>) yet the integration remains incomplete</li>
+                <li class="fragment">An understanding of the <strong>transmission mechanisms</strong> between inputs (participation) and outputs (influence) remains ripe for exploration</li>
+            </ul>
+        </div>
+        <span class="slide-number">5</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 6: CARTOON
+         ============================================ -->
+    <section class="slide" id="slide-6" data-slide="6" data-section="theory">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <img src="assets/cartoon.png" alt="Cartoon" style="max-width: 600px; width: 100%; border-radius: 8px;">
+        </div>
+        <span class="slide-number">6</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 7: POLIS DATASET
+         ============================================ -->
+    <section class="slide" id="slide-7" data-slide="7" data-section="theory">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; max-width: 700px; margin: 0 auto;">
+                <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-weight: 600; color: var(--accent); margin-bottom: 1rem;">POLIS Dataset</h3>
+                <p style="font-size: clamp(0.9rem, 1.4vw, 1.05rem); color: var(--text-secondary); margin-bottom: 0.25rem;">Participation, Organizing, and Local Influence Study</p>
+                <p style="font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.6; margin-top: 1rem;">Tracks the organizational infrastructure linking civic participation and political power</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div style="text-align: center; padding: 1.5rem; background: var(--accent-light); border-radius: 12px;">
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 600; color: var(--accent); line-height: 1;">38</div>
+                    <div style="font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: var(--text-secondary); margin-top: 0.5rem;">organizations</div>
+                </div>
+                <div style="text-align: center; padding: 1.5rem; background: var(--accent-light); border-radius: 12px;">
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 600; color: var(--accent); line-height: 1;">10</div>
+                    <div style="font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: var(--text-secondary); margin-top: 0.5rem;">states</div>
+                </div>
+                <div style="text-align: center; padding: 1.5rem; background: var(--accent-light); border-radius: 12px;">
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 600; color: var(--accent); line-height: 1;">41K</div>
+                    <div style="font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: var(--text-secondary); margin-top: 0.5rem;">participants</div>
+                </div>
+                <div style="text-align: center; padding: 1.5rem; background: var(--accent-light); border-radius: 12px;">
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 600; color: var(--accent); line-height: 1;">54M</div>
+                    <div style="font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: var(--text-secondary); margin-top: 0.5rem;">voter contacts</div>
+                </div>
+            </div>
+
+            <p class="small-text" style="margin-top: 1.5rem; text-align: center;">
+                E. McKenna, 2026, "POLIS Database (Participation, Organizing, and Local Influence Study)", <a href="https://doi.org/10.7910/DVN/SCLKL7" style="color: var(--accent);">Harvard Dataverse</a>, doi:10.7910/DVN/SCLKL7
+            </p>
+        </div>
+        <span class="slide-number">7</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 8: IPO DEFINITION + DDX
+         ============================================ -->
+    <section class="slide" id="slide-8" data-slide="8" data-section="methods">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <div class="statement-box">
+                <p>Whose data is included so far?</p>
+            </div>
+
+            <div class="fragment" style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1rem;">
+                <p style="font-size: 1.15rem; line-height: 1.5;"><strong style="color: var(--accent);">38 independent power-building organizations (IPOs)</strong> — multifaith, multiracial, working class membership associations</p>
+                <p style="font-size: 0.8rem; color: #b45309; margin-top: 0.4rem; font-style: italic;">[PLACEHOLDER — confirm data-bearing N: 38 = partnership agreements; event-log data exists for a smaller subset. State the true CRM-data org N here.]</p>
+            </div>
+
+            <div class="fragment">
+                <p style="font-size: 1.2rem; color: var(--text); font-weight: 600; margin: 1rem 0;">DDx voter contact comparison (2024 General Election):</p>
+
+                <div style="background: white; border: 1px solid var(--border); padding: 1.25rem 1.5rem;">
+                    <div style="display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 1rem; font-size: 0.95rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: var(--accent);"></div>
+                            <span style="font-weight: 600;">POLIS IPOs</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: #A8A29E;"></div>
+                            <span>Mainstream Dem Programs</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <div style="display: grid; grid-template-columns: 130px 1fr 1fr; gap: 0.5rem; align-items: center;">
+                            <div style="font-size: 0.95rem; font-weight: 500; text-align: right;">Voters of Color</div>
+                            <div style="display: flex; justify-content: flex-end;"><div style="width: 78%; height: 22px; background: var(--accent); display: flex; align-items: center; padding-left: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">78%</span></div></div>
+                            <div style="display: flex;"><div style="width: 45%; height: 22px; background: #A8A29E; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">45%</span></div></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 130px 1fr 1fr; gap: 0.5rem; align-items: center;">
+                            <div style="font-size: 0.95rem; font-weight: 500; text-align: right;">Under Age 44</div>
+                            <div style="display: flex; justify-content: flex-end;"><div style="width: 52%; height: 22px; background: var(--accent); display: flex; align-items: center; padding-left: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">52%</span></div></div>
+                            <div style="display: flex;"><div style="width: 38%; height: 22px; background: #A8A29E; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">38%</span></div></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 130px 1fr 1fr; gap: 0.5rem; align-items: center;">
+                            <div style="font-size: 0.95rem; font-weight: 500; text-align: right;">Low Propensity</div>
+                            <div style="display: flex; justify-content: flex-end;"><div style="width: 61%; height: 22px; background: var(--accent); display: flex; align-items: center; padding-left: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">61%</span></div></div>
+                            <div style="display: flex;"><div style="width: 50%; height: 22px; background: #A8A29E; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">50%</span></div></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 130px 1fr 1fr; gap: 0.5rem; align-items: center;">
+                            <div style="font-size: 0.95rem; font-weight: 500; text-align: right;">Rural Voters</div>
+                            <div style="display: flex; justify-content: flex-end;"><div style="width: 35%; height: 22px; background: var(--accent); display: flex; align-items: center; padding-left: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">35%</span></div></div>
+                            <div style="display: flex;"><div style="width: 18%; height: 22px; background: #A8A29E; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">18%</span></div></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 130px 1fr 1fr; gap: 0.5rem; align-items: center;">
+                            <div style="font-size: 0.95rem; font-weight: 500; text-align: right;">New Registrants</div>
+                            <div style="display: flex; justify-content: flex-end;"><div style="width: 24%; height: 22px; background: var(--accent); display: flex; align-items: center; padding-left: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">24%</span></div></div>
+                            <div style="display: flex;"><div style="width: 12%; height: 22px; background: #A8A29E; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;"><span style="color: white; font-size: 0.8rem; font-weight: 600;">12%</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fragment">
+                <div class="evidence-grid" style="margin-top: 1rem;">
+                    <div class="evidence-card">
+                        <div class="evidence-stat">1 in 8</div>
+                        <div class="evidence-label">Harris-Walz voter contacts came from POLIS IPOs</div>
+                    </div>
+                    <div class="evidence-card">
+                        <div class="evidence-stat">72% higher</div>
+                        <div class="evidence-label">IPO contact rate (9.3% vs 5.4%)</div>
+                    </div>
+                </div>
+
+                <p class="small-text" style="margin-top: 0.75rem; font-style: italic;">DDx = Democratic Data Exchange · Includes Biden-Harris 2024 campaign · Comparison between POLIS IPOs and other Democratic-aligned voter contact programs</p>
+            </div>
+        </div>
+        <span class="slide-number">8</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 9: TAYLOR QUOTE
+         ============================================ -->
+    <section class="slide" id="slide-9" data-slide="9" data-section="methods">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered" style="max-width: 900px;">
+            <div style="display: grid; grid-template-columns: 1fr 1.8fr; gap: 2.5rem; align-items: start;">
+                <img src="assets/amusement.webp" alt="Amusement park" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); margin-top: 0.5rem;">
+                <div>
+                    <blockquote style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.2rem, 2.2vw, 1.5rem); line-height: 1.5; color: var(--text); font-style: italic; margin-bottom: 1.5rem; text-align: left;">
+                        "Getting you to vote is just getting you into the <span style="color: var(--accent); font-weight: 600;">amusement park</span>. It doesn't get you on any of the rides. From there, we talk about the legislation, the policy... all the work that we do to inform and enhance and change the laws to benefit our community."
+                    </blockquote>
+                    <div style="text-align: right;">
+                        <p style="font-size: 1.1rem; font-weight: 600; color: var(--text);">— John R. Taylor III</p>
+                        <p style="font-size: 1rem; color: var(--text-secondary);">Black Male Initiative Georgia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">9</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 10: FEBRUARY 2026
+         ============================================ -->
+    <section class="slide" id="slide-10" data-slide="10" data-section="methods">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div class="statement-box" style="margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                <p style="font-size: 1.4rem;">Well past the election, the orgs in this study are leading hyperlocal efforts to defend communities against federal overreach.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="fragment state-card-img" style="padding: 1.25rem; border-radius: 8px;">
+                    <!-- Minnesota outline - from Wikimedia Commons public domain -->
+                    <svg viewBox="460 60 90 130" style="width: 42px; height: 55px; flex-shrink: 0;">
+                        <path d="m 464.7,68.6 -1.1,2.8 .8,1.4 -.3,5.1 -.5,1.1 2.7,9.1 1.3,2.5 .7,14 1,2.7 -.4,5.8 2.9,7.4 .3,5.8 -.1,2.1 -.1,2.2 -.9,2 -3.1,1.9 -.3,1.2 1.7,2.5 .4,1.8 2.6,.6 1.5,1.9 -.2,39.5 h 28.2 l 36.3,-.9 18.6,-.7 -1.1,-4.5 -.2,-3 -2.2,-3 -2.8,-.7 -5.2,-3.6 -.6,-3.3 -6.3,-3.1 -.2,-1.3 h -3.3 l -2.2,-2.6 -2,-1.3 .7,-5.1 -.9,-1.6 .5,-5.4 1,-1.8 -.3,-2.7 -1.2,-1.3 -1.8,-.3 v -1.7 l 2.8,-5.8 5.9,-3.9 -.4,-13 .9,.4 .6,-.5 .1,-1.1 .9,-.6 1.4,1.2 .7,-.1 v 0 l -1.2,-2.2 4.3,-3.1 3.1,-3.7 1.6,-.8 4.7,-5.9 6.3,-5.8 3.9,-2.1 6.3,-2.7 7.6,-4.5 -.6,-.4 -3.7,.7 -2.8,.1 -1,-1.6 -1.4,-.9 -9.8,1.2 -1,-2.8 -1.6,-.1 -1.7,.8 -3.7,3.1 h -4.1 l -2.1,-1 -.3,-1.7 -3.9,-.8 -.6,-1.6 -.7,-1.3 -1,.9 -2.6,.1 -9.9,-5.5 h -2.9 l -.8,-.7 -3.1,1.3 -.8,1.3 -3.3,.8 -1.3,-.2 v -1.7 l -.7,-.9 h -5.9 l -.4,-1.4 h -2.6 l -1.1,.4 -2.4,-1.7 .3,-1.4 -.6,-2.4 -.7,-1.1 -.2,-3 -1,-3.1 -2.1,-1.6 h -2.9 l .1,8 -30.9,-.4 z" fill="var(--accent)" stroke="var(--bg)" stroke-width="0.6"/>
+                    </svg>
+                    <div class="text" style="font-size: 1.05rem; line-height: 1.5;"><strong>Minnesota</strong> — Faith-based coalitions mobilized rapid response to ICE enforcement, including a 2,000-person rally at the state Capitol.</div>
+                </div>
+                <div class="fragment state-card-img" style="padding: 1.25rem; border-radius: 8px;">
+                    <!-- Ohio outline - from Wikimedia Commons public domain -->
+                    <svg viewBox="680 200 60 90" style="width: 40px; height: 55px; flex-shrink: 0;">
+                        <path d="m 685.7,208.8 1.9,-.4 3,1.3 2.1,.6 .7,.9 h 1 l 1,-1.5 1.3,.8 h 1.5 l -.1,1 -3.1,.5 -2,1.1 1.9,.8 1.6,-1.5 2.4,-.4 2.2,1.5 1.5,-.1 2.5,-1.7 3.6,-2.1 5.2,-.3 4.9,-5.9 3.8,-3.1 9.3,-5.1 4.9,29.9 -2.2,1.2 1.4,2.1 -.1,2.2 .6,2 -1.1,3.4 -.1,5.4 -1,3.6 .5,1.1 -.4,2.2 -1.1,.5 -2,3.3 -1.8,2 h -.6 l -1.8,1.7 -1.3,-1.2 -1.5,1.8 -.3,1.2 h -1.3 l -1.3,2.2 .1,2.1 -1,.5 1.4,1.1 v 1.9 l -1,.2 -.7,.8 -1,.5 -.6,-2.1 -1.6,-.5 -1,2.3 -.3,2.2 -1.1,1.3 1.3,3.6 -1.5,.8 -.4,3.5 h -1.5 l -3.2,1.4 -1.2,-2.1 -3.5,-1.4 -.8,-2.9 -.5,-.8 -3.4,1.8 -.6,1.7 h -.9 l -1.3,.7 -1.2,-.8 -3,-.8 -1.9,.8 v 1 l -2.2,-.2 -1.9,-2.1 -2.3,.2 -4.1,-.7 v -1 l -2.2,-3.4 -2.9,-1.2 -1.9,.8 -2.2,-.1 -1.3,-.5 -6.6,-57.2 21.4,-3.5 z" fill="var(--accent)" stroke="var(--bg)" stroke-width="0.8"/>
+                    </svg>
+                    <div class="text" style="font-size: 1.05rem; line-height: 1.5;"><strong>Ohio</strong> — In Springfield (to protect Haitian immigrants), a church event drew 1,000+ attendees; local organizations passed a City Commission resolution on ICE cooperation.</div>
+                </div>
+                <div class="fragment state-card-img" style="padding: 1.25rem; border-radius: 8px;">
+                    <!-- Maine outline - from Wikimedia Commons public domain -->
+                    <svg viewBox="870 55 50 80" style="width: 32px; height: 50px; flex-shrink: 0;">
+                        <path d="m 875,128.7 .6,4 3.2,2 .8,2.2 2.3,1.4 1.4,-.3 1,-3 -.8,-2.9 1.6,-.9 .5,-2.8 -.6,-1.3 3.3,-1.9 -2.2,-2.3 .9,-2.4 1.4,-2.2 .5,3.2 1.6,-2 1.3,.9 1.2,-.8 v -1.7 l 3.2,-1.3 .3,-2.9 2.5,-.2 2.7,-3.7 v -.7 l -.9,-.5 -.1,-3.3 .6,-1.1 .2,1.6 1,-.5 -.2,-3.2 -.9,.3 -.1,1.2 -1.2,-1.4 .9,-1.4 .6,.1 1.1,-.4 .5,2.8 2,-.3 2.9,.7 v -1 l -1.1,-1.2 1.3,.1 .1,-2.3 .6,.8 .3,1.9 2.1,1.5 .2,-1 .9,-.2 -.3,-.8 .8,-.6 -.1,-1.6 -1.6,-.2 -2,.7 1.4,-1.6 .7,-.8 1.3,-.2 .4,1.3 1.7,1.6 .4,-2.1 2.3,-1.2 -.9,-1.3 .1,-1.7 1.1,.5 h .7 l 1.7,-1.4 .4,-2.3 2.2,.3 .1,-.7 .2,-1.6 .5,1.4 1.5,-1 2.3,-4.1 -.1,-2.2 -1.4,-2 -3,-3.2 h -1.9 l -.8,2.2 -2.9,-3 .3,-.8 v -1.5 l -1.6,-4.5 -.8,-.2 -.7,.4 h -4.8 l -.3,-3.6 -8.1,-26 -7.3,-3.7 -2.9,-.1 -6.7,6.6 -2.7,-1 -1,-3.9 h -2.7 l -6.9,19.5 .7,6.2 -1.7,2.4 -.4,4.6 1.3,3.7 .8,.2 v 1.6 l -1.6,4.5 -1.5,1.4 -1.3,2.2 -.4,7.8 -2.4,-1 -1.5,.4 z" fill="var(--accent)" stroke="var(--bg)" stroke-width="0.5"/>
+                    </svg>
+                    <div class="text" style="font-size: 1.05rem; line-height: 1.5;"><strong>Maine</strong> — Coordinated advocacy contributed to the end of enhanced federal enforcement operations.</div>
+                </div>
+                <div class="fragment state-card-img" style="padding: 1.25rem; border-radius: 8px;">
+                    <!-- Missouri outline - from Wikimedia Commons public domain -->
+                    <svg viewBox="480 245 130 100" style="width: 60px; height: 46px; flex-shrink: 0;">
+                        <path d="m 555.3,248.9 -1.1,-1.1 -.6,-1.6 -1.7,-1.3 -14.3,.8 -27.2,1.2 -25.9,-.1 1.3,1.3 -.3,1.4 2.1,3.7 3.9,6.3 2.9,3 2,.6 .9,-1 1.5,2.1 -.1,1.2 -2.7,2.6 -.5,2.3 2.5,2.5 2.6,4.7 3.2,.7 .5,48.1 .2,10.8 39.1,-.7 39.8,-2 1.6,2.5 v 2.2 l -1.7,1.5 -2.8,5.1 11.2,-.8 1,-2 1.2,-.5 v -.7 l -1.2,-1.1 -.6,-1 1.7,.2 .8,-.7 -1.4,-1.5 1.4,-.5 .1,-1 -.6,-1 v -1.3 l -.7,-.7 .2,-1 h 1.1 l .7,.7 -.3,1 .8,.7 .8,-1 1,-2.7 1.4,.9 .7,-.4 1.2,-4.1 -1,-1 1,-2 .2,-.9 -1.3,-.8 h -2.8 l -1.4,-1.5 -1.8,-3.8 v -1.9 l .8,-.6 .1,-1.3 -1.7,-1.9 -.9,-2.5 -2.7,-4.1 -4.8,-1.3 -7.4,-7.1 -.4,-2.4 2.8,-7.6 -.4,-1.9 1.2,-1.1 v -1.3 l -2.8,-1.5 -3,-.7 -3.4,1.2 -1.3,-2.3 .6,-1.9 -.7,-2.4 -8.6,-8.4 -2.2,-1.5 -2.5,-5.9 -1.2,-5.4 1.4,-3.7 z" fill="var(--accent)" stroke="var(--bg)" stroke-width="0.6"/>
+                    </svg>
+                    <div class="text" style="font-size: 1.05rem; line-height: 1.5;"><strong>Missouri</strong> — POLIS organizations collected 3x the required signatures to place an anti-gerrymandering measure on the ballot.</div>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">10</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 12: RESULTS PREVIEW
+         ============================================ -->
+    <section class="slide" id="slide-12" data-slide="12" data-section="results">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2>Three Key Results</h2>
+
+            <ol style="list-style: none; margin-top: 1.5rem;">
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 1.75rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-right: 1.25rem; line-height: 1;">1</span>
+                    <div>
+                        <p style="font-size: 1.4rem; font-weight: 600; margin-bottom: 0.35rem;">Attrition (exit)</p>
+                        <p style="font-size: 1.15rem; color: var(--text-secondary);">Most exit after one event, but orgs with higher organizing event ratios retained more participants (OR = 1.41, p < 0.001)</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 1.75rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-right: 1.25rem; line-height: 1;">2</span>
+                    <div>
+                        <p style="font-size: 1.4rem; font-weight: 600; margin-bottom: 0.35rem;">Leadership density & policy influence (voice)</p>
+                        <p style="font-size: 1.15rem; color: var(--text-secondary);">Thresholds associated with translation of mobilization into power</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 1.75rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-right: 1.25rem; line-height: 1;">3</span>
+                    <div>
+                        <p style="font-size: 1.4rem; font-weight: 600; margin-bottom: 0.35rem;">Networks (culture of agency)</p>
+                        <p style="font-size: 1.15rem; color: var(--text-secondary);">Relational architecture reveals who builds collective capacity</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <span class="slide-number">12</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 13: RESULT 1 - ATTRITION
+         ============================================ -->
+    <section class="slide" id="slide-13" data-slide="13" data-section="results" data-result="attrition">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div class="statement-box">
+                <p>Most participants <em>exit</em> after a single engagement.</p>
+            </div>
+
+            <!-- Inline attrition chart -->
+            <div style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem;">
+                <div style="display: grid; gap: 0.4rem; font-size: 0.9rem;">
+                    <!-- Aggregate donut legend -->
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 0.75rem; font-size: 0.9rem;">
+                        <div style="display: flex; align-items: center; gap: 0.4rem;">
+                            <div style="width: 12px; height: 12px; background: #A8A29E; border-radius: 2px;"></div>
+                            <span><strong>Grey</strong> — 1 event (exit)</span>
+                            <span style="font-weight: 600; color: #A8A29E;">71%</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.4rem;">
+                            <div style="width: 12px; height: 12px; background: #3B82F6; border-radius: 2px;"></div>
+                            <span><strong>Blue</strong> — 2-4 events</span>
+                            <span style="font-weight: 600; color: #3B82F6;">20.8%</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.4rem;">
+                            <div style="width: 12px; height: 12px; background: var(--accent); border-radius: 2px;"></div>
+                            <span><strong>Purple</strong> — 5+ events</span>
+                            <span style="font-weight: 600; color: #601f9e;">8.2%</span>
+                        </div>
+                    </div>
+                    <!-- Top performers (13%+ purple) -->
+                    <div style="display: grid; gap: 0.4rem;">
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Rural Civic NC</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 56%; background: #A8A29E;"></div><div style="width: 28%; background: #3B82F6;"></div><div style="width: 16%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">16%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">FaithMN</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 60.5%; background: #A8A29E;"></div><div style="width: 24.3%; background: #3B82F6;"></div><div style="width: 15.2%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">15%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Immigrant Rights WI</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 69.9%; background: #A8A29E;"></div><div style="width: 15.4%; background: #3B82F6;"></div><div style="width: 14.7%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">15%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">FaithWI</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 62.5%; background: #A8A29E;"></div><div style="width: 22.8%; background: #3B82F6;"></div><div style="width: 14.6%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">15%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">People Power MI</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 69.9%; background: #A8A29E;"></div><div style="width: 16.9%; background: #3B82F6;"></div><div style="width: 13.1%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">13%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Civic OH</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 62.6%; background: #A8A29E;"></div><div style="width: 24.6%; background: #3B82F6;"></div><div style="width: 12.7%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">13%</div>
+                        </div>
+                    </div>
+                    <!-- Remaining orgs -->
+                    <div style="display: grid; gap: 0.4rem;">
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Civic Growth WI</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 57.2%; background: #A8A29E;"></div><div style="width: 33.4%; background: #3B82F6;"></div><div style="width: 9.4%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">9%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Immigrant Rights NV</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 78.1%; background: #A8A29E;"></div><div style="width: 13.7%; background: #3B82F6;"></div><div style="width: 8.2%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--accent);">8%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Labor Justice MO</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 77.6%; background: #A8A29E;"></div><div style="width: 15.2%; background: #3B82F6;"></div><div style="width: 7.2%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">7%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Fight for AZ</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 70.7%; background: #A8A29E;"></div><div style="width: 23.9%; background: #3B82F6;"></div><div style="width: 5.4%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">5%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">United MI</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 69.3%; background: #A8A29E;"></div><div style="width: 25.4%; background: #3B82F6;"></div><div style="width: 5.3%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">5%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">ReproJus MO</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 72.9%; background: #A8A29E;"></div><div style="width: 22.7%; background: #3B82F6;"></div><div style="width: 4.4%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">4%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Civic Federation NC</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 77.3%; background: #A8A29E;"></div><div style="width: 18.5%; background: #3B82F6;"></div><div style="width: 4.2%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">4%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Faith Interfaith PA</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 75.2%; background: #A8A29E;"></div><div style="width: 20.8%; background: #3B82F6;"></div><div style="width: 4%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">4%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Black Civic NC</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 73.8%; background: #A8A29E;"></div><div style="width: 22.6%; background: #3B82F6;"></div><div style="width: 3.5%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">4%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">AAPI Civic PA</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 84.4%; background: #A8A29E;"></div><div style="width: 14%; background: #3B82F6;"></div><div style="width: 1.6%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">2%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Urban Action MI</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 84.2%; background: #A8A29E;"></div><div style="width: 14.3%; background: #3B82F6;"></div><div style="width: 1.5%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">2%</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                            <div style="font-weight: 500; text-align: right;">Youth Power AZ</div>
+                            <div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden;"><div style="width: 95%; background: #A8A29E;"></div><div style="width: 5%; background: #3B82F6;"></div><div style="width: 0%; background: var(--accent);"></div></div>
+                            <div style="font-weight: 600; color: var(--text-secondary);">0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="small-text" style="margin-top: 0.5rem; text-align: center;">
+                N = 41,625 participants across 18 organizations ·
+                <a href="#slide-balance" style="color: var(--accent);">Org-level scatter →</a> ·
+                <a href="#slide-att-60" style="color: var(--accent);">60% Sankey →</a>
+            </p>
+        </div>
+        <span class="slide-number">13</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 14: FIRST EVENT - ODDS RATIO
+         ============================================ -->
+    <section class="slide" id="slide-14" data-slide="14" data-section="results" data-result="attrition-or">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div style="display: flex; gap: 2rem; align-items: center;">
+                <div style="flex: 1; max-width: 520px;">
+                    <img src="assets/first-event-retention.png" alt="Bar chart: Organizing 33.1% vs Mobilizing 26.0% return rate" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
+                </div>
+                <div style="flex: 0 0 280px;">
+                    <div class="statement-box">
+                        <p>Participants whose first event was organizing had 41% higher odds of returning, as compared to mobilizing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">14</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 15: FIRST EVENT - BY ORG
+         ============================================ -->
+    <section class="slide" id="slide-15" data-slide="15" data-section="results" data-result="attrition-org">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div style="display: flex; gap: 2rem; align-items: center;">
+                <div style="flex: 1; max-width: 520px;">
+                    <img src="assets/first-event-by-org.png" alt="Scatter plot: 12 of 14 orgs show organizing advantage" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
+                </div>
+                <div style="flex: 0 0 280px;">
+                    <div class="statement-box" style="margin-bottom: 0.75rem;">
+                        <p>The effect was consistent across organizations (most points above diagonal).</p>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">12 of 14 organizations above diagonal · organizing first → higher return rate</p>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">15</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 17: PURPLE LINE TRACKED
+         ============================================ -->
+    <section class="slide" id="slide-17" data-slide="17" data-section="results" data-result="purple">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <div class="statement-box">
+                <p>Organizations tracked "purple line" leaders prospectively and over time.</p>
+            </div>
+
+            <!-- Legend -->
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; font-size: 0.95rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 24px; height: 4px; background: #A8A29E;"></div><span>Grey (1 event)</span></div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 24px; height: 4px; background: #3B82F6;"></div><span>Blue (2-4)</span></div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 24px; height: 4px; background: #601f9e;"></div><span>Purple (5+)</span></div>
+            </div>
+
+            <!-- Facet chart: 6 orgs with grey/blue/purple lines -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                <!-- Civic OH -->
+                <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;">
+                    <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Civic OH <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">(4,760)</span></div>
+                    <svg viewBox="0 0 150 55" style="width: 100%; height: 85px;">
+                        <line x1="15" y1="8" x2="15" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <line x1="15" y1="42" x2="100" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <text x="15" y="50" font-size="7" fill="#78716C">Jan</text>
+                        <text x="100" y="50" font-size="7" fill="#78716C" text-anchor="end">Dec</text>
+                        <path d="M15,40 C35,38 55,32 75,22 C85,14 92,10 97,8" fill="none" stroke="#A8A29E" stroke-width="2"/>
+                        <text x="105" y="10" font-size="8" fill="#A8A29E" font-weight="600">2,984</text>
+                        <path d="M15,40 C35,39 55,36 75,30 C85,26 92,22 97,20" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="105" y="22" font-size="8" fill="#3B82F6" font-weight="600">1,171</text>
+                        <path d="M15,40 C35,39 55,38 75,34 C85,31 92,29 97,27" fill="none" stroke="#601f9e" stroke-width="2.5"/>
+                        <text x="105" y="30" font-size="8" fill="#601f9e" font-weight="700">605</text>
+                    </svg>
+                </div>
+                <!-- FaithMN -->
+                <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;">
+                    <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">FaithMN <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">(3,946)</span></div>
+                    <svg viewBox="0 0 150 55" style="width: 100%; height: 85px;">
+                        <line x1="15" y1="8" x2="15" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <line x1="15" y1="42" x2="100" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <text x="15" y="50" font-size="7" fill="#78716C">Jan</text>
+                        <text x="100" y="50" font-size="7" fill="#78716C" text-anchor="end">Dec</text>
+                        <path d="M15,40 C35,37 55,30 75,20 C85,12 92,9 97,8" fill="none" stroke="#A8A29E" stroke-width="2"/>
+                        <text x="105" y="10" font-size="8" fill="#A8A29E" font-weight="600">2,387</text>
+                        <path d="M15,40 C35,38 55,34 75,26 C85,21 92,18 97,16" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="105" y="18" font-size="8" fill="#3B82F6" font-weight="600">959</text>
+                        <path d="M15,40 C35,39 55,36 75,30 C85,27 92,25 97,24" fill="none" stroke="#601f9e" stroke-width="2.5"/>
+                        <text x="105" y="27" font-size="8" fill="#601f9e" font-weight="700">599</text>
+                    </svg>
+                </div>
+                <!-- Rural Civic NC -->
+                <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;">
+                    <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Rural Civic NC <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">(3,699)</span></div>
+                    <svg viewBox="0 0 150 55" style="width: 100%; height: 85px;">
+                        <line x1="15" y1="8" x2="15" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <line x1="15" y1="42" x2="100" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <text x="15" y="50" font-size="7" fill="#78716C">Jan</text>
+                        <text x="100" y="50" font-size="7" fill="#78716C" text-anchor="end">Dec</text>
+                        <path d="M15,40 C35,36 55,28 75,18 C85,11 92,8 97,8" fill="none" stroke="#A8A29E" stroke-width="2"/>
+                        <text x="105" y="10" font-size="8" fill="#A8A29E" font-weight="600">2,071</text>
+                        <path d="M15,40 C35,37 55,31 75,23 C85,17 92,14 97,13" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="105" y="15" font-size="8" fill="#3B82F6" font-weight="600">1,036</text>
+                        <path d="M15,40 C35,38 55,35 75,29 C85,25 92,23 97,22" fill="none" stroke="#601f9e" stroke-width="2.5"/>
+                        <text x="105" y="25" font-size="8" fill="#601f9e" font-weight="700">592</text>
+                    </svg>
+                </div>
+                <!-- FaithWI -->
+                <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;">
+                    <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">FaithWI <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">(1,853)</span></div>
+                    <svg viewBox="0 0 150 55" style="width: 100%; height: 85px;">
+                        <line x1="15" y1="8" x2="15" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <line x1="15" y1="42" x2="100" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <text x="15" y="50" font-size="7" fill="#78716C">Jan</text>
+                        <text x="100" y="50" font-size="7" fill="#78716C" text-anchor="end">Dec</text>
+                        <path d="M15,40 C35,36 55,28 75,18 C85,12 92,9 97,8" fill="none" stroke="#A8A29E" stroke-width="2"/>
+                        <text x="105" y="10" font-size="8" fill="#A8A29E" font-weight="600">1,158</text>
+                        <path d="M15,40 C35,37 55,32 75,25 C85,20 92,17 97,16" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="105" y="18" font-size="8" fill="#3B82F6" font-weight="600">422</text>
+                        <path d="M15,40 C35,38 55,36 75,31 C85,28 92,26 97,25" fill="none" stroke="#601f9e" stroke-width="2.5"/>
+                        <text x="105" y="28" font-size="8" fill="#601f9e" font-weight="700">271</text>
+                    </svg>
+                </div>
+                <!-- People Power MI -->
+                <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;">
+                    <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">People Power MI <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">(1,593)</span></div>
+                    <svg viewBox="0 0 150 55" style="width: 100%; height: 85px;">
+                        <line x1="15" y1="8" x2="15" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <line x1="15" y1="42" x2="100" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <text x="15" y="50" font-size="7" fill="#78716C">Jan</text>
+                        <text x="100" y="50" font-size="7" fill="#78716C" text-anchor="end">Dec</text>
+                        <path d="M15,40 C35,36 55,28 75,18 C85,11 92,8 97,8" fill="none" stroke="#A8A29E" stroke-width="2"/>
+                        <text x="105" y="10" font-size="8" fill="#A8A29E" font-weight="600">1,114</text>
+                        <path d="M15,40 C35,38 55,35 75,29 C85,25 92,23 97,22" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="105" y="25" font-size="8" fill="#3B82F6" font-weight="600">269</text>
+                        <path d="M15,40 C35,39 55,37 75,33 C85,30 92,28 97,27" fill="none" stroke="#601f9e" stroke-width="2.5"/>
+                        <text x="105" y="30" font-size="8" fill="#601f9e" font-weight="700">209</text>
+                    </svg>
+                </div>
+                <!-- Immigrant Rights WI -->
+                <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;">
+                    <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Immigrant Rights WI <span style="color: var(--text-secondary); font-weight: 400; font-size: 0.85rem;">(585)</span></div>
+                    <svg viewBox="0 0 150 55" style="width: 100%; height: 85px;">
+                        <line x1="15" y1="8" x2="15" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <line x1="15" y1="42" x2="100" y2="42" stroke="#E7E5E4" stroke-width="1"/>
+                        <text x="15" y="50" font-size="7" fill="#78716C">Jan</text>
+                        <text x="100" y="50" font-size="7" fill="#78716C" text-anchor="end">Dec</text>
+                        <path d="M15,40 C35,34 55,24 75,14 C85,10 92,8 97,8" fill="none" stroke="#A8A29E" stroke-width="2"/>
+                        <text x="105" y="10" font-size="8" fill="#A8A29E" font-weight="600">409</text>
+                        <path d="M15,40 C35,38 55,35 75,29 C85,25 92,23 97,22" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="105" y="25" font-size="8" fill="#3B82F6" font-weight="600">90</text>
+                        <path d="M15,40 C35,39 55,37 75,34 C85,31 92,29 97,28" fill="none" stroke="#601f9e" stroke-width="2.5"/>
+                        <text x="105" y="31" font-size="8" fill="#601f9e" font-weight="700">86</text>
+                    </svg>
+                </div>
+            </div>
+
+            <p style="margin-top: 1.25rem; text-align: center; font-size: 1.1rem; color: var(--text-secondary);">
+                <strong>Source:</strong> POLIS Dataset · January–December 2024
+            </p>
+        </div>
+        <span class="slide-number">16</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 17: LEADERSHIP DENSITY THRESHOLDS
+         ============================================ -->
+    <section class="slide" id="slide-17" data-slide="17" data-section="results" data-result="thresholds">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div class="statement-box">
+                <p>Leadership density (not mobilization volume) is associated with policy influence.</p>
+            </div>
+
+            <table class="threshold-table fragment" style="margin-top: 2rem;">
+                <thead>
+                    <tr>
+                        <th style="font-size: 1rem; padding: 1.25rem;">Purple Line Leaders</th>
+                        <th style="font-size: 1rem; padding: 1.25rem;">Base Multiplier</th>
+                        <th style="font-size: 1rem; padding: 1.25rem;">2024-25 Outcomes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight">
+                        <td class="number" style="font-size: 1.75rem; padding: 1.25rem;">&gt;200</td>
+                        <td style="font-size: 1.2rem; padding: 1.25rem;">3x or larger</td>
+                        <td style="font-size: 1.1rem; padding: 1.25rem; line-height: 1.5;">Statewide wins (MN 7/7 races; OH Emilia Sykes; NC broke supermajority; AZ Prop 139 abortion; WI referenda; MO Prop A min wage, Amend 3 abortion; AZ Prop 479 transportation)</td>
+                    </tr>
+                    <tr>
+                        <td class="number" style="font-size: 1.75rem; padding: 1.25rem;">80-200</td>
+                        <td style="font-size: 1.2rem; padding: 1.25rem;">2x or larger</td>
+                        <td style="font-size: 1.1rem; padding: 1.25rem; line-height: 1.5;">Local campaign wins (e.g., MI judge races, NC school board races)</td>
+                    </tr>
+                    <tr>
+                        <td class="number" style="font-size: 1.75rem; padding: 1.25rem;">&lt;50</td>
+                        <td style="font-size: 1.2rem; padding: 1.25rem;">Any size</td>
+                        <td style="font-size: 1.1rem; padding: 1.25rem; line-height: 1.5;">No policy translation (participation without power)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="table-note" style="font-size: 1.1rem; margin-top: 1.5rem;">* Pattern consistent across electoral contexts and across orgs that mobilized similar volumes of participation at peak campaign moments.</p>
+        </div>
+        <span class="slide-number">17</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 17: NC DEEP DIVE (COMBINED)
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="results" data-result="purple">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <div class="statement-box" style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 50px; height: 35px; background: var(--accent); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; flex-shrink: 0;">NC</div>
+                <p>North Carolina: From school boards to Supreme Court</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; margin-top: 1rem; align-items: start;">
+                <div class="fragment">
+                    <img src="assets/DF-DPS-win.jpg" alt="Durham school board win" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+                    <p class="small-text" style="margin-top: 0.5rem; text-align: center;">Durham school board: 4/4 seats won (March 2026) · 995 purple line leaders across 2 NC organizations</p>
+                </div>
+                <ul class="bullet-list" style="font-size: clamp(0.95rem, 1.4vw, 1.1rem); margin-top: 0;">
+                    <li class="fragment"><strong style="color: var(--accent);">Jason Dunkin</strong> (purple line leader) first organized residents in Granville Co. to restore a local playground and basketball court, then led a team of vols to elect the first-ever Black Sheriff</li>
+                    <li class="fragment"><strong style="color: var(--accent);">Allison Riggs</strong> won NC Supreme Court by <strong>734 votes</strong> (closest statewide race in NC history); POLIS IPOs led ballot-curing effort to secure her victory</li>
+                    <li class="fragment">POLIS IPOs helped flip a state House seat by a mere <strong>228 votes</strong>, breaking GOP supermajority</li>
+                </ul>
+            </div>
+        </div>
+        <span class="slide-number">18</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 18: NETWORKS
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="results" data-result="networks">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide" style="max-width: 1100px;">
+            <div class="statement-box" style="margin-bottom: 0.75rem;">
+                <p><strong>Cascade leaders</strong> &mdash; who recruit people who then recruit others &mdash; retain far above everyone else.</p>
+                <p style="font-size: 0.95rem; color: var(--text); margin-top: 0.5rem;">90-day return (equal-runway test sample): cascade <strong style="color: var(--accent);">.80</strong> &nbsp;·&nbsp; terminal recruiter <strong>.62</strong> &nbsp;·&nbsp; non-recruiter <strong style="color: #A8A29E;">.24</strong></p>
+                <p style="font-size: 0.8rem; color: #b45309; margin-top: 0.4rem; font-style: italic;">[PLACEHOLDER &mdash; confirm before talk: ~100 recruiters / 23 cascade leaders across 4 orgs w/ reliable Recruited-By (GROW, WISDOM, CF, MU); "non-recruiter" = not-recorded-as-recruiter, so contrast is conservative. Graph below is one illustrative org network: N=426 · 413 relationships.]</p>
+            </div>
+
+            <!-- Legend -->
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 0.5rem; font-size: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 28px; height: 4px; background: #601f9e;"></div>
+                    <span><strong>Cascade</strong> — recruited someone who recruits</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 28px; height: 4px; background: #D1D5DB;"></div>
+                    <span><strong>Terminal</strong> — recruited someone who doesn't recruit</span>
+                </div>
+            </div>
+
+            <!-- Full Network Image (first click) -->
+            <div class="fragment" style="display: flex; justify-content: center; align-items: center; position: relative;">
+                <img src="assets/recruitment-network.png" alt="Recruitment Network" style="max-width: 100%; max-height: 55vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+            </div>
+
+            <!-- Interactive Network SVG (second click - zoom to Sasha) -->
+            <div class="fragment" style="display: flex; justify-content: center; align-items: center; margin-top: -55vh; position: relative; z-index: 10; background: var(--bg);">
+                <svg id="networkGraph" viewBox="0 0 800 500" style="width: 100%; max-width: 900px; height: auto; min-height: 400px;">
+                    <style>
+                        .network-node { cursor: pointer; transition: transform 0.2s, filter 0.2s; }
+                        .network-node:hover { transform: scale(1.3); filter: drop-shadow(0 0 8px rgba(124,58,237,0.6)); }
+                        .network-node:hover + .node-label { opacity: 1; }
+                        .node-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+                        .node-label.visible { opacity: 1; }
+                        .network-edge { stroke-width: 1; opacity: 0.4; }
+                        .cascade-edge { stroke: #601f9e; }
+                        .terminal-edge { stroke: #D1D5DB; }
+                    </style>
+                    <defs>
+                        <linearGradient id="nodeGradPower" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#601f9e"/>
+                            <stop offset="100%" style="stop-color:#8b5cb8"/>
+                        </linearGradient>
+                        <linearGradient id="nodeGradStrong" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8b5cb8"/>
+                            <stop offset="100%" style="stop-color:#C4B5FD"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Terminal edges (grey) - from Sasha to terminal nodes -->
+                    <g class="edges-terminal">
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="180" y2="120"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="220" y2="90"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="160" y2="180"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="140" y2="250"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="160" y2="320"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="180" y2="380"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="220" y2="410"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="620" y2="120"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="580" y2="90"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="640" y2="180"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="660" y2="250"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="640" y2="320"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="620" y2="380"/>
+                        <line class="network-edge terminal-edge" x1="400" y1="250" x2="580" y2="410"/>
+                        <!-- More terminal edges from secondary hubs -->
+                        <line class="network-edge terminal-edge" x1="280" y1="180" x2="100" y2="140"/>
+                        <line class="network-edge terminal-edge" x1="280" y1="180" x2="80" y2="200"/>
+                        <line class="network-edge terminal-edge" x1="280" y1="180" x2="120" y2="80"/>
+                        <line class="network-edge terminal-edge" x1="520" y1="180" x2="700" y2="140"/>
+                        <line class="network-edge terminal-edge" x1="520" y1="180" x2="720" y2="200"/>
+                        <line class="network-edge terminal-edge" x1="520" y1="180" x2="680" y2="80"/>
+                        <line class="network-edge terminal-edge" x1="320" y1="350" x2="180" y2="440"/>
+                        <line class="network-edge terminal-edge" x1="320" y1="350" x2="120" y2="400"/>
+                        <line class="network-edge terminal-edge" x1="480" y1="350" x2="620" y2="440"/>
+                        <line class="network-edge terminal-edge" x1="480" y1="350" x2="680" y2="400"/>
+                        <!-- Third-level terminal edges -->
+                        <line class="network-edge terminal-edge" x1="100" y1="140" x2="40" y2="100"/>
+                        <line class="network-edge terminal-edge" x1="100" y1="140" x2="30" y2="160"/>
+                        <line class="network-edge terminal-edge" x1="700" y1="140" x2="760" y2="100"/>
+                        <line class="network-edge terminal-edge" x1="700" y1="140" x2="770" y2="160"/>
+                    </g>
+                    <!-- Cascade edges (purple) - from Sasha to recruiters who also recruit -->
+                    <g class="edges-cascade">
+                        <line class="network-edge cascade-edge" x1="400" y1="250" x2="280" y2="180" stroke-width="2.5"/>
+                        <line class="network-edge cascade-edge" x1="400" y1="250" x2="520" y2="180" stroke-width="2.5"/>
+                        <line class="network-edge cascade-edge" x1="400" y1="250" x2="320" y2="350" stroke-width="2"/>
+                        <line class="network-edge cascade-edge" x1="400" y1="250" x2="480" y2="350" stroke-width="2"/>
+                        <line class="network-edge cascade-edge" x1="400" y1="250" x2="250" y2="280" stroke-width="1.5"/>
+                        <line class="network-edge cascade-edge" x1="400" y1="250" x2="550" y2="280" stroke-width="1.5"/>
+                        <!-- Secondary cascade edges -->
+                        <line class="network-edge cascade-edge" x1="280" y1="180" x2="100" y2="140" stroke-width="1.5"/>
+                        <line class="network-edge cascade-edge" x1="520" y1="180" x2="700" y2="140" stroke-width="1.5"/>
+                    </g>
+                    <!-- Terminal nodes (smallest, grey) -->
+                    <g class="nodes-terminal">
+                        <circle class="network-node" cx="40" cy="100" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="30" cy="160" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="760" cy="100" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="770" cy="160" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="180" cy="120" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="220" cy="90" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="160" cy="180" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="140" cy="250" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="160" cy="320" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="180" cy="380" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="220" cy="410" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="620" cy="120" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="580" cy="90" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="640" cy="180" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="660" cy="250" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="640" cy="320" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="620" cy="380" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="580" cy="410" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="80" cy="200" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="120" cy="80" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="720" cy="200" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="680" cy="80" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="180" cy="440" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="120" cy="400" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="620" cy="440" r="5" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="680" cy="400" r="5" fill="#E5E7EB"/>
+                        <!-- Additional scattered terminal nodes -->
+                        <circle class="network-node" cx="60" cy="280" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="90" cy="350" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="740" cy="280" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="710" cy="350" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="300" cy="60" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="500" cy="60" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="300" cy="460" r="4" fill="#E5E7EB"/>
+                        <circle class="network-node" cx="500" cy="460" r="4" fill="#E5E7EB"/>
+                    </g>
+                    <!-- Strong recruiters (5-9 recruits) -->
+                    <g class="nodes-strong">
+                        <circle class="network-node" cx="100" cy="140" r="9" fill="url(#nodeGradStrong)" stroke="white" stroke-width="1"/>
+                        <text class="node-label visible" x="100" y="125" text-anchor="middle" fill="#57534E">Lena</text>
+                        <circle class="network-node" cx="700" cy="140" r="9" fill="url(#nodeGradStrong)" stroke="white" stroke-width="1"/>
+                        <text class="node-label visible" x="700" y="125" text-anchor="middle" fill="#57534E">Lucia</text>
+                    </g>
+                    <!-- Power recruiters (10+ recruits) -->
+                    <g class="nodes-power">
+                        <circle class="network-node" cx="280" cy="180" r="14" fill="url(#nodeGradPower)" stroke="white" stroke-width="2"/>
+                        <text class="node-label visible" x="280" y="160" text-anchor="middle" fill="#1C1917" font-weight="700">Charlotte</text>
+                        <text class="node-label visible" x="280" y="205" text-anchor="middle" fill="#57534E" font-size="9">(39)</text>
+
+                        <circle class="network-node" cx="520" cy="180" r="13" fill="url(#nodeGradPower)" stroke="white" stroke-width="2"/>
+                        <text class="node-label visible" x="520" y="160" text-anchor="middle" fill="#1C1917" font-weight="700">Lana</text>
+                        <text class="node-label visible" x="520" y="205" text-anchor="middle" fill="#57534E" font-size="9">(33)</text>
+
+                        <circle class="network-node" cx="320" cy="350" r="11" fill="url(#nodeGradPower)" stroke="white" stroke-width="2"/>
+                        <text class="node-label visible" x="320" y="375" text-anchor="middle" fill="#1C1917" font-weight="700">Kaia</text>
+                        <text class="node-label visible" x="320" y="337" text-anchor="middle" fill="#57534E" font-size="9">(17)</text>
+
+                        <circle class="network-node" cx="480" cy="350" r="11" fill="url(#nodeGradPower)" stroke="white" stroke-width="2"/>
+                        <text class="node-label visible" x="480" y="375" text-anchor="middle" fill="#1C1917" font-weight="700">Delilah</text>
+                        <text class="node-label visible" x="480" y="337" text-anchor="middle" fill="#57534E" font-size="9">(15)</text>
+
+                        <circle class="network-node" cx="250" cy="280" r="10" fill="url(#nodeGradPower)" stroke="white" stroke-width="1.5"/>
+                        <text class="node-label visible" x="250" y="300" text-anchor="middle" fill="#57534E">Willa (12)</text>
+
+                        <circle class="network-node" cx="550" cy="280" r="10" fill="url(#nodeGradPower)" stroke="white" stroke-width="1.5"/>
+                        <text class="node-label visible" x="550" y="300" text-anchor="middle" fill="#57534E">Daphne (10)</text>
+                    </g>
+                    <!-- Central hub: Sasha (185 recruits) -->
+                    <g class="node-center">
+                        <circle cx="400" cy="250" r="30" fill="url(#nodeGradPower)" stroke="white" stroke-width="3" class="network-node" style="filter: drop-shadow(0 4px 12px rgba(124,58,237,0.4));"/>
+                        <text x="400" y="245" text-anchor="middle" fill="white" font-family="'Source Serif 4', Georgia, serif" font-size="14" font-weight="700">Sasha</text>
+                        <text x="400" y="262" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11">(185)</text>
+                    </g>
+                                    </svg>
+            </div>
+
+        </div>
+        <span class="slide-number">19</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 20: DORAN SCHRANTZ QUOTE
+         ============================================ -->
+    <section class="slide" id="slide-20" data-slide="20" data-section="results">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <blockquote style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.6; color: var(--text); font-style: italic; max-width: 800px; margin: 0 auto; padding: 2rem; border-left: 5px solid var(--accent);">
+                "It is the <strong style="color: var(--accent);">depth and structure</strong> of organized bases that determine whether a scaled voter mobilization can be translated into long-term power."
+                <span style="display: block; font-style: normal; font-size: 1.2rem; margin-top: 1.5rem; color: var(--text-secondary);">— Doran Schrantz, ISAIAH</span>
+            </blockquote>
+        </div>
+        <span class="slide-number">20</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 21: PROPOSED MECHANISMS (ALL 6)
+         ============================================ -->
+    <section class="slide" id="slide-discussion" data-slide="21" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2 style="font-size: clamp(1.6rem, 3.5vw, 2.5rem); margin-bottom: 0.25rem;">Proposed Mechanisms</h2>
+            <p style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--accent); font-weight: 600;">Based on companion qualitative research: 2 years of fieldwork; 50+ in-depth interviews</p>
+
+            <ol style="list-style: none; margin-top: 0.75rem;">
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 0.85rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-right: 0.75rem; line-height: 1;">1</span>
+                    <div>
+                        <p style="font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600; margin-bottom: 0.15rem;">Culture of agency</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Agency develops not through repetition but through proximity to others acting agentically. It requires sufficient density to spread.</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 0.85rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-right: 0.75rem; line-height: 1;">2</span>
+                    <div>
+                        <p style="font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600; margin-bottom: 0.15rem;">Relational bandwidth</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Each leader sustains finite accountability relationships; below threshold, orgs bleed members after defeats</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 0.85rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-right: 0.75rem; line-height: 1;">3</span>
+                    <div>
+                        <p style="font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600; margin-bottom: 0.15rem;">Signal credibility to power</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Officials distinguish organized relationships from mobilized turnout; threshold marks when density becomes legible as durable threat</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 0.85rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-right: 0.75rem; line-height: 1;">4</span>
+                    <div>
+                        <p style="font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600; margin-bottom: 0.15rem;">Redundancy and succession</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Below threshold: org is 1-2 people deep; above threshold: survives burnout and targeting</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 0.85rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-right: 0.75rem; line-height: 1;">5</span>
+                    <div>
+                        <p style="font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600; margin-bottom: 0.15rem;">Internal knowledge transmission</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Tacit knowledge of local power lives in people; above threshold, organizational learning compounds over cycles</p>
+                    </div>
+                </li>
+                <li class="fragment" style="display: flex; align-items: baseline; margin-bottom: 0.85rem;">
+                    <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-right: 0.75rem; line-height: 1;">6</span>
+                    <div>
+                        <p style="font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600; margin-bottom: 0.15rem;">Boundary-spanning capacity</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Statewide wins require coordinating across nodes (&gt;200 may reflect minimum infrastructure to span territory)</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <span class="slide-number">20</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 20: CULTURE OF AGENCY QUOTES
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <p style="font-size: 1.3rem; color: var(--accent); font-weight: 600; margin-bottom: 1.25rem; text-align: center;">Example: Mechanism #1 — Culture of Agency</p>
+
+            <div class="fragment pull-quote">
+                "I made a choice with my team that we were going to believe in people a lot more and center actual normal people in our work and ask them to do hard things and not even hard things, just necessary things...<span class="fragment">And since then, every single organizer has an organizing committee in specific districts that they're organizing. We're not just being a grab bag, seeing whoever comes toward us. We were like, no, we need to build power in this district."</span>
+                <span class="attribution">— Rowan, ReproJus (MO)</span>
+            </div>
+
+            <div class="fragment pull-quote" style="margin-top: 1rem;">
+                "You <em>know</em> when you are in a <span style="font-style: normal;">sí se puede</span> group or a <span style="font-style: normal;">no se puede</span> group."
+                <span class="attribution">— Joy Cushman</span>
+            </div>
+        </div>
+        <span class="slide-number">21</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 22: THREE THEORETICAL CONVERSATIONS
+         ============================================ -->
+    <section class="slide" id="slide-theory" data-slide="theory" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <h2>Three Theoretical Conversations</h2>
+
+            <div class="three-col" id="theoryColumns">
+                <div class="theory-col" data-col="1">
+                    <h3>Mass Mobilization & Thresholds</h3>
+                    <p class="label">Core Insight</p>
+                    <p>Participation scale associated with regime-level disruption (the 3.5% rule) (<a href="https://cup.columbia.edu/book/why-civil-resistance-works/9780231527484/" style="color: var(--accent);">Chenoweth & Stephan 2011</a>; <a href="https://www.journalofdemocracy.org/articles/the-future-of-nonviolent-resistance-2/" style="color: var(--accent);">Chenoweth 2020</a>: 47% decline in success rate since 2010)</p>
+                    <p class="label">Empirical Domain</p>
+                    <p>Maximalist campaigns, autocratic overthrow</p>
+                    <div class="extension">
+                        <p class="label">Purple Line Extension</p>
+                        <p>Incremental policy influence at state and local level</p>
+                    </div>
+                </div>
+                <div class="theory-col" data-col="2">
+                    <h3>Organizing vs. Mobilizing</h3>
+                    <p class="label">Core Insight</p>
+                    <p>Depth over breadth (<a href="https://global.oup.com/academic/product/how-organizations-develop-activists-9780199336760" style="color: var(--accent);">Han 2014</a>; <a href="https://global.oup.com/academic/product/no-shortcuts-9780190868659" style="color: var(--accent);">McAlevey 2016</a>)</p>
+                    <p class="label">Empirical Domain</p>
+                    <p>Organizational civic depth</p>
+                    <div class="extension">
+                        <p class="label">Purple Line Extension</p>
+                        <p>Empirical operationalization of the distinction; validated thresholds from longitudinal data</p>
+                    </div>
+                </div>
+                <div class="theory-col" data-col="3">
+                    <h3>Exit, Voice, and Loyalty</h3>
+                    <p class="label">Core Insight</p>
+                    <p>Exit is default; voice requires investment (Hirschman 1970)</p>
+                    <p class="label">Empirical Domain</p>
+                    <p>Individual disposition toward voice or exit</p>
+                    <div class="extension">
+                        <p class="label">Purple Line Extension</p>
+                        <p>Without leadership density, exit is structurally unavoidable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">22</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 22: LIMITATIONS
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2>Limitations</h2>
+
+            <ul class="bullet-list" style="font-size: clamp(1rem, 1.5vw, 1.15rem); margin-top: 2rem;">
+                <li class="fragment">Organizational self-selection into data use agreements</li>
+                <li class="fragment">Measurement consistency across 38 organizations cannot be guaranteed</li>
+                <li class="fragment">Observational design (prospective, threshold non-linearity, cross-context validation across red/blue/purple states) reduces but does not eliminate confounding</li>
+                <li class="fragment">Generalizability to unions, faith communities, and other forms remains open</li>
+            </ul>
+        </div>
+        <span class="slide-number">23</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 23: FUTURE DIRECTIONS
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2>Future Directions</h2>
+
+            <ul class="bullet-list" style="font-size: clamp(0.95rem, 1.4vw, 1.1rem); margin-top: 2rem;">
+                <li class="fragment"><strong>What <span style="text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px;">builds</span> the purple line?</strong>
+                    <ul class="bullet-list" style="margin-top: 0.5rem;">
+                        <li class="sub">Companion paper (McKenna, Ganz, Lin) shows organizing workshops produce measurable shifts in collective agency</li>
+                    </ul>
+                </li>
+                <li class="fragment"><strong>Why are thresholds where they are?</strong> Relational bandwidth hypothesis requires direct testing</li>
+                <li class="fragment"><strong>Threshold variation</strong> by issue domain, organizational model, political context</li>
+                <li class="fragment"><strong>Democratic backsliding:</strong> Does the redundancy mechanism become primary under authoritarian pressure?</li>
+            </ul>
+        </div>
+        <span class="slide-number">24</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE: TAKEAWAYS FOR CIVIL SOCIETY & SUSTAINABILITY (climate audience)
+         ============================================ -->
+    <section class="slide" id="slide-takeaways" data-slide="takeaways" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2>Takeaways for Civil Society &amp; Sustainability</h2>
+
+            <div class="statement-box" style="margin: 1rem 0 1.25rem;">
+                <p>Climate is the paradigm case of a fight that needs <em>durable</em> power, not episodic surges &mdash; the work outlasts any single mobilization.</p>
+            </div>
+
+            <ul class="bullet-list" style="font-size: clamp(0.95rem, 1.4vw, 1.15rem);">
+                <li class="fragment"><strong>The crowd is not the capacity.</strong> The largest climate marches and strikes produce mostly grey-line turnout (1 event, then exit). Headcounts measure a moment; they do not measure the organization left behind.</li>
+                <li class="fragment"><strong>The purple line is the infrastructure question.</strong> What sustains a movement across decades is leadership density &mdash; the thin stratum who stay, are developed, and go on to recruit and develop others.</li>
+                <li class="fragment"><strong>Relationships build power; activity alone does not.</strong> Committed but atomized participation (postcards, solo phone-banking) retains the person but builds no collective capacity. Cascade leaders &mdash; who develop other leaders &mdash; are the engine. <span style="color: #b45309; font-style: italic;">[reframe placeholder: two axes &mdash; agency + relationship]</span></li>
+                <li class="fragment"><strong>Measure what you want to build.</strong> Sustainability organizations should track the purple line and, above all, log <em>who recruited whom</em> &mdash; the most diagnostic datum of a movement's relational substrate.</li>
+            </ul>
+
+            <p class="small-text" style="margin-top: 1.25rem; font-style: italic;">Cf. Fisher (2024), <em>Saving Ourselves: From Climate Shocks to Climate Action</em> &mdash; climate action turns on sustained civic capacity, not shocks alone.</p>
+        </div>
+        <span class="slide-number">25</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 25: THANK YOU
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="discussion">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <h2 style="font-size: clamp(2rem, 4vw, 3rem);">Thank You</h2>
+
+            <div style="max-width: 300px; margin: 1.5rem auto;">
+                <img src="assets/cake-cropped.jpeg" alt="Purple line cake" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+                <p class="small-text" style="text-align: center; margin-top: 0.5rem; font-style: italic; font-size: 1rem;">PICO (CA), 2025</p>
+            </div>
+
+            <p class="author-name" style="font-size: 1.3rem;">Elizabeth McKenna</p>
+            <p class="author-affiliation" style="font-size: 1.1rem;">emckenna@hks.harvard.edu</p>
+        </div>
+        <span class="slide-number">25</span>
+    </section>
+
+    <!-- ============================================
+         SLIDE 25: APPENDIX TITLE
+         ============================================ -->
+    <section class="slide" id="slide-appendix" data-slide="25" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content centered">
+            <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--text-secondary);">Appendix</h2>
+        </div>
+    </section>
+
+    <!-- ============================================
+         APPENDIX: MO LEGISLATOR QUOTE
+         ============================================ -->
+    <section class="slide" id="slide-25" data-slide="25" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content" style="max-width: 800px;">
+            <p style="font-size: 1.1rem; color: var(--accent); font-weight: 600; margin-bottom: 1.25rem; text-align: center;">On credible commitment through sustained presence:</p>
+
+            <div class="fragment pull-quote" style="font-size: clamp(1.1rem, 1.8vw, 1.3rem);">
+                "They do the work. They door-knock. They show up, they have monthly meetings to organize in the community to talk about different issues. So they're keeping the community engaged."
+            </div>
+
+            <div class="fragment pull-quote" style="font-size: clamp(1.1rem, 1.8vw, 1.3rem); margin-top: 1rem;">
+                "They're effective because they are building, they're building true people power, right? They're not waiting for a spark moment of legislation and then being like, 'Okay, we have to reorganize.' They're organizing 24/7, seven days a week, all year round."
+            </div>
+
+            <div class="fragment pull-quote" style="font-size: clamp(1.1rem, 1.8vw, 1.3rem); margin-top: 1rem;">
+                "And I think some groups sometimes they have spark moments and then they kind of lay low and then they come back around and lay low. So [this organization] is just staying in everybody's face."
+            </div>
+
+            <p style="text-align: right; margin-top: 1.5rem; font-size: 1rem; color: var(--text-secondary);">— State legislator, Missouri (R)</p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         APPENDIX: BEVINS
+         ============================================ -->
+    <section class="slide" id="slide-26" data-slide="26" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <h2>Global Pattern: High Participation, Low Civic Power</h2>
+
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Success rate of 10 key mass protests (2010-2020)</p>
+
+            <div style="text-align: center;">
+                <img src="assets/bevins.png" alt="If We Burn by Vincent Bevins" style="max-height: 55vh; border-radius: 4px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+            </div>
+
+            <p class="small-text" style="margin-top: 1rem;">Source: Bevins, V. (2023). <em>If We Burn</em>. <a href="https://vincentbevins.com/book2/" style="color: var(--accent);">[Link]</a></p>
+        </div>
+        <span class="slide-number">A1</span>
+    </section>
+
+    <!-- ============================================
+         APPENDIX: POLIS METHODS
+         ============================================ -->
+    <section class="slide" id="slide-27" data-slide="27" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2>POLIS Methods</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; font-size: 0.9rem; margin-top: 1rem;">
+                <div>
+                    <p style="font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">What POLIS makes visible:</p>
+                    <ul class="bullet-list" style="font-size: 0.85rem;">
+                        <li>Who participates and how engagement deepens or atrophies over time</li>
+                        <li>Internal structure: leadership density, relational architecture, recruitment networks</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">Outcomes (traced through multiple methods):</p>
+                    <ul class="bullet-list" style="font-size: 0.85rem;">
+                        <li>Policy wins and electoral influence via prospective case studies, interviews, organizational records</li>
+                        <li>Relationships with officials via interviews with leaders, volunteers, staff, policymakers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="small-text" style="margin-top: 1.5rem; background: var(--accent-light); padding: 0.75rem 1rem; border-radius: 6px;">N = 16, more orgs forthcoming · Red, blue, and purple electoral contexts · Data use agreements with each organization · Quantitative microdata linked to qualitative case documentation</p>
+        </div>
+        <span class="slide-number">A3</span>
+    </section>
+
+    <!-- ============================================
+         APPENDIX: CHENOWETH
+         ============================================ -->
+    <section class="slide" id="slide-28" data-slide="28" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content">
+            <h2 style="font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 1.5rem;">Success Rates of Nonviolent and Violent Mass Campaigns (1930-2019)</h2>
+
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img src="assets/jod.png" alt="Success rates by decade" style="max-width: 100%; max-height: 55vh; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+            </div>
+
+            <p class="small-text">Source: Chenoweth, E. (2020). "The Future of Nonviolent Resistance." <em>Journal of Democracy</em>. <a href="https://www.journalofdemocracy.org/articles/the-future-of-nonviolent-resistance-2/" style="color: var(--accent);">[Link]</a></p>
+        </div>
+        <span class="slide-number">A2</span>
+    </section>
+
+    <!-- ============================================
+         APPENDIX: BALANCE VS ATTRITION
+         ============================================ -->
+    <section class="slide" id="slide-balance" data-slide="balance" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <h2 style="font-size: clamp(1.2rem, 2.2vw, 1.6rem); margin-bottom: 0.5rem;">Event Portfolio Balance vs Attrition (Org-Level)</h2>
+            <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">r = -0.43, R² = 0.19, p = 0.094 (N = 16 organizations)</p>
+
+            <div style="text-align: center;">
+                <img src="assets/balance-attrition-chart.png" alt="Scatter plot showing organizing percentage vs attrition rate" style="max-width: 100%; max-height: 60vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+            </div>
+
+            <p class="small-text" style="margin-top: 1rem; text-align: center;"><a href="#slide-13" style="color: var(--accent);">← Back to Attrition Finding</a></p>
+        </div>
+        <span class="slide-number">A3</span>
+    </section>
+
+
+    <!-- ============================================
+         APPENDIX: ATTRITION 60% CHART
+         ============================================ -->
+    <section class="slide" id="slide-att-60" data-slide="att-60" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <h2 style="font-size: clamp(1.2rem, 2.2vw, 1.6rem); margin-bottom: 1rem;">Attrition Analysis: 60% Exit Rate</h2>
+
+            <div style="text-align: center;">
+                <img src="assets/att-60.png" alt="Attrition chart showing 60% exit rate" style="max-width: 100%; max-height: 65vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+            </div>
+
+            <p class="small-text" style="margin-top: 1rem; text-align: center;"><a href="#slide-13" style="color: var(--accent);">← Back to Attrition Finding</a></p>
+        </div>
+        <span class="slide-number">A4</span>
+    </section>
+
+    <!-- ============================================
+         APPENDIX: JASON DUNKIN
+         ============================================ -->
+    <section class="slide" id="slide-dunkin" data-slide="dunkin" data-section="appendix">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="content wide">
+            <h2 style="font-size: clamp(1.2rem, 2.2vw, 1.6rem); margin-bottom: 1rem;">Jason Dunkin: Purple Line Leader in Action</h2>
+
+            <div style="text-align: center;">
+                <img src="assets/dunkin.png" alt="Jason Dunkin organizing" style="max-width: 100%; max-height: 65vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+            </div>
+
+            <p class="small-text" style="margin-top: 1rem; text-align: center;">NC purple line leader · Led team that helped elect first Black Sheriff in Granville County</p>
+        </div>
+        <span class="slide-number">A7</span>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.getElementById('navDots');
+        const sectionNavLinks = document.querySelectorAll('.section-nav a');
+        const resultsSubnav = document.getElementById('resultsSubnav');
+        const resultsSubnavLinks = document.querySelectorAll('.results-subnav a');
+
+        // Create nav dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            dot.addEventListener('click', () => {
+                slide.scrollIntoView({ behavior: 'smooth' });
+            });
+            navDots.appendChild(dot);
+        });
+
+        // Section nav click handler
+        sectionNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSlide = document.getElementById(targetId);
+                if (targetSlide) {
+                    targetSlide.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Results subnav click handler
+        resultsSubnavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSlide = document.getElementById(targetId);
+                if (targetSlide) {
+                    targetSlide.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Update active states on scroll
+        const sectionNav = document.getElementById('sectionNav');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const slideNum = parseInt(entry.target.dataset.slide);
+                    const currentSection = entry.target.dataset.section;
+                    const currentResult = entry.target.dataset.result;
+
+                    document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === slideNum - 1);
+                    });
+
+                    sectionNavLinks.forEach(link => {
+                        const linkSection = link.dataset.section;
+                        link.classList.toggle('active', linkSection === currentSection);
+                    });
+
+                    // Hide nav on title slide
+                    if (slideNum === 1) {
+                        sectionNav.classList.add('hidden');
+                    } else {
+                        sectionNav.classList.remove('hidden');
+                    }
+
+                    // Show/hide results subnav
+                    if (currentSection === 'results') {
+                        resultsSubnav.classList.add('visible');
+                        resultsSubnavLinks.forEach(link => {
+                            link.classList.toggle('active', link.dataset.result === currentResult);
+                        });
+                    } else {
+                        resultsSubnav.classList.remove('visible');
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Track current slide index
+        let currentSlideIndex = 0;
+
+        // Update current slide index based on scroll position
+        function updateCurrentSlide() {
+            const viewportCenter = window.innerHeight / 2;
+            for (let i = 0; i < slides.length; i++) {
+                const rect = slides[i].getBoundingClientRect();
+                if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+                    currentSlideIndex = i;
+                    return slides[i];
+                }
+            }
+            return slides[currentSlideIndex] || slides[0];
+        }
+
+        // Get unrevealed fragments for a slide
+        function getUnrevealedFragments(slide) {
+            if (!slide) return [];
+            // Get theory columns (slide-theory) OR regular fragments
+            if (slide.id === 'slide-theory') {
+                const cols = [...slide.querySelectorAll('.theory-col:not(.visible)')];
+                if (cols.length > 0) return cols;
+            }
+            return [...slide.querySelectorAll('.fragment:not(.visible)')];
+        }
+
+        // Reveal next fragment, return true if revealed
+        function revealNextFragment(slide) {
+            const fragments = getUnrevealedFragments(slide);
+            if (fragments.length > 0) {
+                fragments[0].classList.add('visible');
+                return true;
+            }
+            return false;
+        }
+
+        // Reset all fragments on a slide
+        function resetSlideFragments(slide) {
+            if (!slide) return;
+            slide.querySelectorAll('.fragment.visible').forEach(f => f.classList.remove('visible'));
+            slide.querySelectorAll('.theory-col.visible').forEach(c => c.classList.remove('visible'));
+        }
+
+        // Go to next slide
+        function goToNextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Go to previous slide
+        function goToPrevSlide() {
+            const currentSlide = slides[currentSlideIndex];
+            resetSlideFragments(currentSlide);
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Handle advance (keyboard, clicker, click)
+        function handleAdvance(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentSlide = updateCurrentSlide();
+            if (!revealNextFragment(currentSlide)) {
+                goToNextSlide();
+            }
+        }
+
+        // Handle retreat
+        function handleRetreat(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            goToPrevSlide();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Forward: Arrow Down, Right, Space, Page Down, Enter
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'Enter') {
+                handleAdvance(e);
+            }
+            // Backward: Arrow Up, Left, Page Up, Backspace
+            else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'Backspace') {
+                handleRetreat(e);
+            }
+        });
+
+        // Click navigation (for touch/mouse, but not on links)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('a, button, nav, .nav-dots')) return;
+            handleAdvance(e);
+        });
+
+        // Update current slide on scroll
+        window.addEventListener('scroll', () => {
+            updateCurrentSlide();
+        }, { passive: true });
+
+        // Reset fragments when leaving slide
+        const fragmentObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    resetSlideFragments(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        slides.forEach(slide => fragmentObserver.observe(slide));
+    </script>
+
+</body>
+</html>
